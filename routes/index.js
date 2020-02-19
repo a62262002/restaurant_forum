@@ -52,4 +52,9 @@ module.exports = (app, passport) => {
     authenticatedAdmin,
     adminController.postRestaurant
   );
+  app.get(
+    "/admin/restaurants/:id",
+    authenticatedAdmin,
+    adminController.getRestaurant
+  );
 };
