@@ -25,11 +25,7 @@ module.exports = (app, passport) => {
     res.redirect("/admin/restaurants")
   );
   // 在 /admin/restaurants 底下則交給 adminController.getRestaurants 處理
-  app.get(
-    "/admin/restaurants",
-    authenticatedAdmin,
-    adminController.getRestaurants
-  );
+
   app.get("/signup", userController.signUpPage);
   app.post("/signup", userController.signUp);
   app.get("/signin", userController.signInPage);
@@ -42,6 +38,11 @@ module.exports = (app, passport) => {
     userController.signIn
   );
   app.get("/logout", userController.logout);
+  app.get(
+    "/admin/restaurants",
+    authenticatedAdmin,
+    adminController.getRestaurants
+  );
   app.get(
     "/admin/restaurants/create",
     authenticatedAdmin,
@@ -66,5 +67,10 @@ module.exports = (app, passport) => {
     "/admin/restaurants/:id",
     authenticatedAdmin,
     adminController.putRestaurant
+  );
+  app.delete(
+    "/admin/restaurants/:id",
+    authenticatedAdmin,
+    adminController.deleteRestaurant
   );
 };
