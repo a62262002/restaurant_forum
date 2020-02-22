@@ -54,11 +54,13 @@ const adminController = {
     }
   },
   getRestaurant: (req, res) => {
-    return Restaurant.findByPk(req.params.id).then(restaurant => {
-      return res.render("admin/restaurant", {
-        restaurant: JSON.parse(JSON.stringify(restaurant))
-      });
-    });
+    return Restaurant.findByPk(req.params.id, { include: [Category] }).then(
+      restaurant => {
+        return res.render("admin/restaurant", {
+          restaurant: JSON.parse(JSON.stringify(restaurant))
+        });
+      }
+    );
   },
   editRestaurant: (req, res) => {
     return Restaurant.findByPk(req.params.id).then(restaurant => {
