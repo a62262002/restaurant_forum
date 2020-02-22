@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.addColumn("Restaurants", "categoryId", {
+    return queryInterface.addColumn("Restaurants", "CategoryId", {
       type: Sequelize.INTEGER,
       allowNull: false,
       reference: {
