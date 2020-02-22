@@ -77,4 +77,6 @@ module.exports = (app, passport) => {
     authenticatedAdmin,
     adminController.deleteRestaurant
   );
+  app.get("/admin/users", authenticated, adminController.getUser);
+  app.put("/admin/users/:id", authenticated, adminController.putUser);
 };
