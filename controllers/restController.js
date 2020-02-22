@@ -22,7 +22,8 @@ const restController = {
       Category.findAll().then(categories => {
         return res.render("restaurants", {
           restaurants: data,
-          categories: JSON.parse(JSON.stringify(categories))
+          categories: JSON.parse(JSON.stringify(categories)),
+          categoryId: JSON.parse(JSON.stringify(categoryId))
         });
       });
     });
