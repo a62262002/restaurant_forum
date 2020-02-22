@@ -16,11 +16,6 @@
     "operatorsAliases": 0
   },
   "production": {
-    "use_env_variable": "CLEAR_DATABASE_URL",
-    "dialect": "postgres",
-    "protocol": "postgres",
-    "dialectOptions": {
-      "ssl": true
-    }
+    "use_env_variable": "CLEARDB_DATABASE_URL"
   }
 }
