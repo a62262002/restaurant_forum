@@ -9,6 +9,7 @@ module.exports = (app, passport) => {
     if (req.isAuthenticated()) {
       return next();
     }
+    res.redirect("/signin");
   };
   const authenticatedAdmin = (req, res, next) => {
     if (req.isAuthenticated()) {
