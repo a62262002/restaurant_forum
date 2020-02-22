@@ -13,6 +13,15 @@ const restController = {
         });
       }
     );
+  },
+  getRestaurant: (req, res) => {
+    return Restaurant.findByPk(req.params.id, {
+      include: Category
+    }).then(restaurant => {
+      return res.render("restaurant", {
+        restaurant: JSON.parse(JSON.stringify(restaurant))
+      });
+    });
   }
 };
 
