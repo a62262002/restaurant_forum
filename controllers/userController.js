@@ -54,6 +54,13 @@ let userController = {
     return User.findByPk(req.params.id).then(user => {
       return res.render("user", { user: JSON.parse(JSON.stringify(user)) });
     });
+  },
+  editUser: (req, res) => {
+    return User.findByPk(req.params.id).then(user => {
+      return res.render("edit", {
+        user: JSON.parse(JSON.stringify(user))
+      });
+    });
   }
 };
 

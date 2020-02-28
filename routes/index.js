@@ -116,4 +116,5 @@ module.exports = (app, passport) => {
     categoryController.deleteCategory
   );
   app.get("/users/:id", authenticated, userController.getUser);
+  app.get("/users/:id/edit", authenticated, userController.editUser);
 };
