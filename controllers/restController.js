@@ -37,7 +37,10 @@ const restController = {
       const data = result.rows.map(r => ({
         ...r,
         description: r.description.substring(0, 50),
-        isFavorited: req.user.FavoritedRestaurants.map(d => d.id).includes(r.id)
+        isFavorited: req.user.FavoritedRestaurants.map(d => d.id).includes(
+          r.id
+        ),
+        isLiked: req.user.LikedRestaurants.map(d => d.id).includes(r.id)
       }));
       Category.findAll().then(categories => {
         return res.render("restaurants", {
@@ -58,7 +61,8 @@ const restController = {
       include: [
         Category,
         { model: Comment, include: [User] },
-        { model: User, as: "FavoritedUsers" }
+        { model: User, as: "FavoritedUsers" },
+        { model: User, as: "LikedUsers" }
       ]
     }).then(restaurant => {
       restaurant.viewCounts += 1;
@@ -66,9 +70,13 @@ const restController = {
         const isFavorited = restaurant.FavoritedUsers.map(d => d.id).includes(
           req.user.id
         );
+        const isLiked = restaurant.LikedUsers.map(d => d.id).includes(
+          req.user.id
+        );
         return res.render("restaurant", {
           restaurant: JSON.parse(JSON.stringify(restaurant)),
-          isFavorited: JSON.parse(JSON.stringify(isFavorited))
+          isFavorited: JSON.parse(JSON.stringify(isFavorited)),
+          isLiked: JSON.parse(JSON.stringify(isLiked))
         });
       });
     });
