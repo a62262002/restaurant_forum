@@ -6,6 +6,7 @@ const imgur = require("imgur-node-api");
 const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID;
 const Restaurant = db.Restaurant;
 const Comment = db.Comment;
+const Favorite = db.Favorite;
 
 let userController = {
   signUpPage: (req, res) => {
@@ -105,15 +106,26 @@ let userController = {
           });
       });
     }
-    // return User.findByPk(req.params.id)
-    //   .then(user => {
-    //     user.update({
-    //       name: req.body.name
-    //     });
-    //   })
-    //   .then(user => {
-    //     res.redirect(`/users/${req.params.id}`);
-    //   });
+  },
+  addFavorite: (req, res) => {
+    return Favorite.create({
+      UserId: req.user.id,
+      RestaurantId: req.params.restaurantId
+    }).then(restaurant => {
+      return res.redirect("back");
+    });
+  },
+  removeFavorite: (req, res) => {
+    return Favorite.findOne({
+      where: {
+        UserId: req.user.id,
+        RestaurantId: req.params.restaurantId
+      }
+    }).then(favorite => {
+      favorite.destroy().then(restaurant => {
+        return res.redirect("back");
+      });
+    });
   }
 };
 
