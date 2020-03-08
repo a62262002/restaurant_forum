@@ -107,6 +107,24 @@ const restController = {
         restaurant: JSON.parse(JSON.stringify(restaurant))
       });
     });
+  },
+  getTopRestaurants: (req, res) => {
+    return Restaurant.findAll({
+      include: [{ model: User, as: "FavoritedUsers" }]
+    }).then(restaurants => {
+      restaurants = restaurants.map(r => ({
+        ...r.dataValues,
+        description: r.description.substring(0, 50),
+        FavoritedCount: r.FavoritedUsers.length,
+        isFavorited: req.user.FavoritedRestaurants.map(d => d.id).includes(r.id)
+      }));
+      restaurants = restaurants
+        .sort((a, b) => b.FavoritedCount - a.FavoritedCount)
+        .slice(0, 10);
+      res.render("topRestaurants", {
+        restaurants: JSON.parse(JSON.stringify(restaurants))
+      });
+    });
   }
 };
 
