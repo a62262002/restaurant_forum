@@ -1,37 +1,37 @@
-"use strict";
-const bcrypt = require("bcryptjs");
-const faker = require("faker");
+'use strict'
+const bcrypt = require('bcryptjs')
+const faker = require('faker')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
     queryInterface.bulkInsert(
-      "Users",
+      'Users',
       [
         {
-          email: "root@example.com",
-          password: bcrypt.hashSync("12345678", bcrypt.genSaltSync(10), null),
+          email: 'root@example.com',
+          password: bcrypt.hashSync('12345678', bcrypt.genSaltSync(10), null),
           isAdmin: true,
-          name: "root",
+          name: 'root',
           image: `https://loremflickr.com/320/240/restaurant,food/?random=${Math.random() *
             100}`,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          email: "user1@example.com",
-          password: bcrypt.hashSync("12345678", bcrypt.genSaltSync(10), null),
+          email: 'user1@example.com',
+          password: bcrypt.hashSync('12345678', bcrypt.genSaltSync(10), null),
           isAdmin: false,
-          name: "user1",
+          name: 'user1',
           image: `https://loremflickr.com/320/240/restaurant,food/?random=${Math.random() *
             100}`,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          email: "user2@example.com",
-          password: bcrypt.hashSync("12345678", bcrypt.genSaltSync(10), null),
+          email: 'user2@example.com',
+          password: bcrypt.hashSync('12345678', bcrypt.genSaltSync(10), null),
           isAdmin: false,
-          name: "user2",
+          name: 'user2',
           image: `https://loremflickr.com/320/240/restaurant,food/?random=${Math.random() *
             100}`,
           createdAt: new Date(),
@@ -39,17 +39,17 @@ module.exports = {
         }
       ],
       {}
-    );
+    )
     queryInterface.bulkInsert(
-      "Categories",
+      'Categories',
       [
-        "中式料理",
-        "日本料理",
-        "義大利料理",
-        "墨西哥料理",
-        "素食料理",
-        "美式料理",
-        "複合式料理"
+        '中式料理',
+        '日本料理',
+        '義大利料理',
+        '墨西哥料理',
+        '素食料理',
+        '美式料理',
+        '複合式料理'
       ].map((item, index) => ({
         id: index + 1,
         name: item,
@@ -57,14 +57,14 @@ module.exports = {
         updatedAt: new Date()
       })),
       {}
-    );
+    )
     return queryInterface.bulkInsert(
-      "Restaurants",
+      'Restaurants',
       Array.from({ length: 50 }).map(d => ({
         name: faker.name.findName(),
         tel: faker.phone.phoneNumber(),
         address: faker.phone.phoneNumber(),
-        opening_hours: "08:00",
+        opening_hours: '08:00',
         image: `https://loremflickr.com/320/240/restaurant,food/?random=${Math.random() *
           100}`,
         description: faker.lorem.text(),
@@ -73,12 +73,12 @@ module.exports = {
         CategoryId: Math.floor(Math.random() * 5) + 1
       })),
       {}
-    );
+    )
   },
 
   down: (queryInterface, Sequelize) => {
-    queryInterface.bulkDelete("Users", null, {});
-    queryInterface.bulkDelete("Categories", null, {});
-    return queryInterface.bulkDelete("Restaurants", null, {});
+    queryInterface.bulkDelete('Users', null, {})
+    queryInterface.bulkDelete('Categories', null, {})
+    return queryInterface.bulkDelete('Restaurants', null, {})
   }
-};
+}

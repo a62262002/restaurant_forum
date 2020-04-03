@@ -7,6 +7,12 @@
       <div class="card-body">
         <h5 class="card-title">{{profile.name}}</h5>
         <p class="card-text">{{profile.email}}</p>
+        <ul class="list-unstyled">
+          <li><strong>{{profile.Comments.length}}</strong>已評論餐廳</li>
+          <li><strong>{{profile.FavoritedRestaurants.length}}</strong>收藏的餐廳</li>
+          <li><strong>{{followingsCount}}</strong>followings(追蹤者)</li>
+          <li><strong>followers(追隨者)</strong></li>
+        </ul>
         {{#ifCond profile.id user.id}}
         <a href="/users/{{profile.id}}/edit">
           <button type="submit" class="btn btn-primary">Edit</button>

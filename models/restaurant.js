@@ -1,7 +1,7 @@
-"use strict";
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   const Restaurant = sequelize.define(
-    "Restaurant",
+    'Restaurant',
     {
       name: DataTypes.STRING,
       tel: DataTypes.STRING,
@@ -12,21 +12,21 @@ module.exports = (sequelize, DataTypes) => {
       viewCounts: DataTypes.INTEGER
     },
     {}
-  );
-  Restaurant.associate = function(models) {
-    Restaurant.belongsTo(models.Category);
-    Restaurant.hasMany(models.Comment);
+  )
+  Restaurant.associate = function (models) {
+    Restaurant.belongsTo(models.Category)
+    Restaurant.hasMany(models.Comment)
     Restaurant.belongsToMany(models.User, {
       through: models.Favorite,
-      foreignKey: "RestaurantId",
-      as: "FavoritedUsers"
-    });
+      foreignKey: 'RestaurantId',
+      as: 'FavoritedUsers'
+    })
     Restaurant.belongsToMany(models.User, {
       through: models.Like,
-      foreignKey: "RestaurantId",
-      as: "LikedUsers"
-    });
-  };
+      foreignKey: 'RestaurantId',
+      as: 'LikedUsers'
+    })
+  }
 
-  return Restaurant;
-};
+  return Restaurant
+}
